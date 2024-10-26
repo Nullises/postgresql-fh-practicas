@@ -56,3 +56,6 @@ USING continent::integer;
      REFERENCES continent(code)
      ON DELETE CASCADE
      ON UPDATE CASCADE;
+
+-- BORRAMOS LA TABLA TEMPORAL
+DROP TABLE country_bk;
