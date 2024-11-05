@@ -179,3 +179,21 @@ $$ LANGUAGE plpgsql;
 -- uso de la función
 SELECT concat(first_name, ' ') || last_name as full_name, 
 salary, max_raise_2(employee_id) as possible_raise FROM employees;
+
+
+-- funcion que retorna un query
+create or replace function country_region()
+	returns table (id CHARACTER(2), name varchar(40), region VARCHAR(25))
+	as $$
+	
+	BEGIN
+	return query 
+		select country_id, country_name, region_name from countries
+		inner join regions on countries.region_id = regions.region_id;
+	END;
+	
+	$$ LANGUAGE plpgsql;
+
+
+
+SELECT * FROM country_region();
